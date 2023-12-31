@@ -1,0 +1,193 @@
+---
+title: "Project"
+author: "Allen Wang"
+date: "2023-12-30"
+output: html_document
+---
+
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(lubridate)
+library(chron)
+```
+
+```{r}
+og <- read.csv("/Users/allenwang/Downloads/export_56061757/activities.csv")
+```
+
+
+```{r}
+df <- read.csv("/Users/allenwang/Downloads/export_56061757/activities.csv")
+```
+
+```{r}
+data <- subset(df, select = c("Activity.Date", "Moving.Time", "Elapsed.Time", "Distance", "Max.Heart.Rate", "Relative.Effort", "Elevation.Gain", "Elevation.Loss", "Max.Grade", "Average.Grade", "Average.Heart.Rate", "Calories", "Average.Speed", "Elevation.Low", "Elevation.High"))
+```
+
+
+```{r}
+summary(data)
+```
+
+```{r}
+data$Distance <- as.numeric(data$Distance)
+```
+
+```{r}
+time_object <- strptime(data$Activity.Date, "%b %e, %Y, %I:%M:%S %p")
+
+data$date <- format(time_object, "%Y-%m-%d")
+data$time <- format(time_object, "%H:%M:%S")
+
+
+data$date <- strptime(data$date, "%Y-%m-%d")
+```
+
+```{r}
+data$pace <- data$Moving.Time / 60 / data$Distance
+```
+
+
+```{r}
+summary(data)
+```
+
+```{r}
+
+```
+
+
+```{r}
+ggplot(data, aes(x = Relative.Effort, y = Max.Heart.Rate)) +
+  geom_point() +
+  labs(title = "Dot Plot of Relative Effort vs Max Heart Rate",
+       x = "Relative Effort",
+       y = "Max Heart Rate") +
+  scale_x_continuous(breaks = seq(0, 300, by = 50), limits = c(0, 300)) +
+  theme_minimal()
+```
+
+
+```{r}
+ggplot(data, aes(x = Moving.Time / 60, y = Calories)) +
+  geom_point() +
+  labs(title = "Dot Plot of Moving Time vs Calories",
+       x = "Moving Time",
+       y = "Calories") +
+  scale_x_continuous(breaks = seq(0, 60, by = 5), limits = c(0, 60)) +
+  theme_minimal()
+```
+
+
+
+```{r}
+ggplot(data, aes(x = Distance, y = Relative.Effort)) +
+  geom_point() +
+  labs(title = "Dot Plot of Distance vs Relative Effort",
+       x = "Distance",
+       y = "Relative Effort") +
+  scale_x_continuous(breaks = seq(0, 12, by = 1), limits = c(0, 12)) +
+  theme_minimal()
+```
+
+
+```{r}
+ggplot(data, aes(x = Distance, y = pace)) +
+  geom_point() +
+  labs(title = "Dot Plot of Distance vs Pace",
+       x = "Distance",
+       y = "Pace") +
+  scale_x_continuous(breaks = seq(0, 12, by = 1), limits = c(0, 12)) +
+  theme_minimal()
+```
+
+
+```{r}
+ggplot(data, aes(x = Distance, y = Calories)) +
+  geom_point() +
+  labs(title = "Dot Plot of Distance vs Calories",
+       x = "Distance",
+       y = "Calories") +
+  scale_x_continuous(breaks = seq(0, 12, by = 1), limits = c(0, 12)) +
+  theme_minimal()
+```
+
+
+```{r}
+ggplot(data, aes(x = Distance, y = Max.Heart.Rate)) +
+  geom_point() +
+  labs(title = "Dot Plot of Distance vs Max Heart Rate",
+       x = "Distance",
+       y = "Max Heart Rate") +
+  scale_x_continuous(breaks = seq(0, 12, by = 1), limits = c(0, 12)) +
+  theme_minimal()
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
